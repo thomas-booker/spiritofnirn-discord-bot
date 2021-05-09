@@ -1,3 +1,5 @@
 spiritofnirn.properties
+auth.json
+treasurehunt.json
 # Project exclude paths
 /.gradle/

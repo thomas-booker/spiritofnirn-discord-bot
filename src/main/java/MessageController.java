@@ -9,34 +9,65 @@ public class MessageController extends ListenerAdapter {
 
     AuthService authService = new AuthService();
 
+    MessageService messageService = new MessageService();
+
         @Override
         public void onMessageReceived(@NotNull MessageReceivedEvent event) {
             DiscordModel discordModel = new DiscordModel(event.getMessage());
             try {
                 handleMessage(event, discordModel);
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        private void handleMessage(MessageReceivedEvent event, DiscordModel discordModel) throws FileNotFoundException {
-            if (event.getMessage().getContentRaw().equals("!ding")) {
-                ownerTest(event, discordModel.getAuthor());
+        private void handleMessage(MessageReceivedEvent event, DiscordModel discordModel) throws IOException {
+            // Owner commands
+            if (getCommand(event).equals("!owner")) {
+                ownerTest(event, discordModel);
             }
 
-            if (event.getMessage().getContentRaw().equals("!admin")) {
+            if (getCommand(event).contains("!addadmin")) {
+                addAdmin(event, discordModel);
+            }
+
+            if (getCommand(event).contains("!removeadmin")) {
+                removeAdmin(event, discordModel);
+            }
+
+            // Admin commands
+            if (getCommand(event).equals("!admin")) {
                 adminTest(event, discordModel);
             }
 
-            if (event.getMessage().getContentRaw().equals("!treasurehunt")) {
+            // Everyone commands
+            if (getCommand(event).equals("!treasurehunt")) {
                 treasureHuntTest(event);
             }
         }
 
+    private void addAdmin(MessageReceivedEvent event, DiscordModel discordModel) throws IOException {
+            String author = discordModel.getAuthor();
+            if (authService.isOwner(author)) {
+                authService.addAdmin(event);
+            } else {
+                messageService.sendMessage(event, author + " , you are not authorised to add admins!");
+            }
+    }
+
+    private void removeAdmin(MessageReceivedEvent event, DiscordModel discordModel) throws IOException {
+            String author = discordModel.getAuthor();
+            if (authService.isOwner(author)) {
+                authService.removeAdmin(event);
+            } else {
+                messageService.sendMessage(event, author + " , you are not authorised to remove admins!");
+            }
+    }
+
     private void treasureHuntTest(MessageReceivedEvent event) {
         try {
             TreasureHunt treasureHunt = new TreasureHunt();
-            event.getChannel().sendMessage(treasureHunt.firstClue()).queue();
+            messageService.sendMessage(event, treasureHunt.firstClue());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,17 +75,22 @@ public class MessageController extends ListenerAdapter {
 
     private void adminTest(MessageReceivedEvent event, DiscordModel discordModel) throws FileNotFoundException {
         if (authService.isAdmin(discordModel.getAuthor())) {
-            event.getChannel().sendMessage("Success!").queue();
+            messageService.sendMessage(event,"Success!");
         } else {
-            event.getChannel().sendMessage("Rekt").queue();
+            messageService.sendMessage(event,"Rekt");
         }
     }
 
-    private void ownerTest(MessageReceivedEvent event, String author) throws FileNotFoundException {
+    private void ownerTest(MessageReceivedEvent event, DiscordModel discordModel) throws FileNotFoundException {
+            String author = discordModel.getAuthor();
         if (authService.isOwner(author)) {
-            event.getChannel().sendMessage("Lovelocke is my master, and he has a big Dong!").queue();
+            messageService.sendMessage(event, "Owner test successful, " + author + "!");
         } else {
-            event.getChannel().sendMessage("Get fucked " + author + ", you nobhead").queue();
+            messageService.sendMessage(event,"You are not the owner, " + author + "!");
         }
+    }
+
+    private String getCommand(MessageReceivedEvent event) {
+            return event.getMessage().getContentRaw();
     }
 }

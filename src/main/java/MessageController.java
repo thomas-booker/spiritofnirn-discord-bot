@@ -47,32 +47,48 @@ public class MessageController extends ListenerAdapter {
             // TH Admin commands
             if (getCommand(event).contains("!th")) {
                 if (authService.isAdmin(discordModel.getAuthor()) || authService.isOwner(discordModel.getAuthor())) {
-                    if (getCommand(event).contains("addfirstclue")) {
+                    if (getCommand(event).contains("!th-getallclues")) {
+                        treasureHunt.getAllClues(discordModel);
+                    }
+
+                    if (getCommand(event).contains("!th-getfirstclue")) {
+                        treasureHunt.getClue("First");
+                    }
+
+                    if (getCommand(event).contains("!th-addfirstclue")) {
                         treasureHunt.addFirstClue(discordModel);
                     }
 
-                    if (getCommand(event).contains("removefirstclue")) {
+                    if (getCommand(event).contains("!th-removefirstclue")) {
                         treasureHunt.removeFirstClue(discordModel);
                     }
 
-                    if (getCommand(event).contains("addsecondclue")) {
+                    if (getCommand(event).contains("!th-getsecondclue")) {
+                        treasureHunt.getClue("Second");
+                    }
+
+                    if (getCommand(event).contains("!th-addsecondclue")) {
                         treasureHunt.addSecondClue(discordModel);
                     }
 
-                    if (getCommand(event).contains("removesecondclue")) {
+                    if (getCommand(event).contains("!th-removesecondclue")) {
                         treasureHunt.removeSecondClue(discordModel);
                     }
 
-                    if (getCommand(event).contains("addthirdclue")) {
+                    if (getCommand(event).contains("!th-getthirdclue")) {
+                        treasureHunt.getClue("Third");
+                    }
+
+                    if (getCommand(event).contains("!th-addthirdclue")) {
                         treasureHunt.addThirdClue(discordModel);
                     }
 
-                    if (getCommand(event).contains("removethirdclue")) {
+                    if (getCommand(event).contains("!th-removethirdclue")) {
                         treasureHunt.removeThirdClue(discordModel);
                     }
 
-                    if (getCommand(event).contains("reset")) {
-                        treasureHunt.reset(discordModel);
+                    if (getCommand(event).contains("!th-reset")) {
+                        treasureHunt.reset();
                     }
                 } else {
                     messageService.sendMessage(discordModel, discordModel.getAuthor()
@@ -82,7 +98,7 @@ public class MessageController extends ListenerAdapter {
 
             // TH Everyone
             if (getCommand(event).equals("!treasurehunt")) {
-
+                treasureHunt.getFirstClueWithPermissionsCheck(discordModel);
             }
         }
 

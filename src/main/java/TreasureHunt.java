@@ -1,8 +1,12 @@
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TreasureHunt {
@@ -11,12 +15,30 @@ public class TreasureHunt {
 
     DiscordModel discordModel;
 
+    JsonFileService jsonFileService = new JsonFileService();
+
     public TreasureHunt(DiscordModel discordModel) {
         this.discordModel = discordModel;
     }
 
+    public void getFirstClueWithPermissionsCheck(DiscordModel discordModel) throws FileNotFoundException {
+        messageService.sendMessage(discordModel, jsonFileService.getFirstClueWithPermissionsCheck(discordModel));
+    }
 
-    public void addFirstClue(DiscordModel discordModel) {
+    public void getClue(String clue) throws FileNotFoundException {
+        messageService.sendMessage(discordModel,clue + " clue: " + jsonFileService.getClue(clue.toLowerCase()));
+    }
+
+    public void getAllClues(DiscordModel discordModel) throws FileNotFoundException {
+        ArrayList<String> allClues = jsonFileService.getAllClues();
+
+        messageService.sendMessage(discordModel, "First clue: " + allClues.get(0));
+        messageService.sendMessage(discordModel, "Second clue: " + allClues.get(1));
+        messageService.sendMessage(discordModel, "Third clue: " + allClues.get(2));
+    }
+
+    public void addFirstClue(DiscordModel discordModel) throws IOException {
+        jsonFileService.addFirstClue(discordModel);
         messageService.sendMessage(discordModel, discordModel.getAuthor() + " , first clue added!");
     }
 
@@ -24,24 +46,27 @@ public class TreasureHunt {
 
     }
 
-    public void addSecondClue(DiscordModel discordModel) {
-
+    public void addSecondClue(DiscordModel discordModel) throws IOException {
+        jsonFileService.addSecondClue(discordModel);
+        messageService.sendMessage(discordModel, discordModel.getAuthor() + " , second clue added!");
     }
 
     public void removeSecondClue(DiscordModel discordModel) {
 
     }
 
-    public void addThirdClue(DiscordModel discordModel) {
-
+    public void addThirdClue(DiscordModel discordModel) throws IOException {
+        jsonFileService.addThirdClue(discordModel);
+        messageService.sendMessage(discordModel, discordModel.getAuthor() + " , third clue added!");
     }
 
     public void removeThirdClue(DiscordModel discordModel) {
 
     }
 
-    public void reset(DiscordModel discordModel) {
-
+    public void reset() throws IOException {
+        jsonFileService.resetAllClues();
+        messageService.sendMessage(discordModel, discordModel.getAuthor() + " , all clues reset!");
     }
 
     public String firstClue() throws IOException {

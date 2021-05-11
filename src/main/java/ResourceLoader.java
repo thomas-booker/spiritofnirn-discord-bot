@@ -10,9 +10,15 @@ public class ResourceLoader {
     }
 
     public static BufferedReader getAuthFile() throws FileNotFoundException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(URIs.AUTH));
+        return getFile(URIs.AUTH);
+    }
 
-        return bufferedReader;
+    public static BufferedReader getTreasureHuntFile() throws FileNotFoundException {
+        return getFile(URIs.TREASURE_HUNT);
+    }
+
+    public static BufferedReader getFile(String URI) throws FileNotFoundException {
+        return new BufferedReader(new FileReader(URI));
     }
 
     private static Properties getResourceFile(String propertiesFileLocation) {

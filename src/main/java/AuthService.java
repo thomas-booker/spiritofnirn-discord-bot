@@ -2,9 +2,6 @@ import com.google.gson.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class AuthService {
     private static final String OWNER = "owner";
@@ -22,8 +19,8 @@ public class AuthService {
         return getAuthJsonMembers(ADMIN).contains(user);
     }
 
-    public void addAdmin(MessageReceivedEvent event) throws IOException {
-        String user = getFirstMentionedUser(event);
+    public void addAdmin(DiscordModel discordModel) throws IOException {
+        String user = getFirstMentionedUser(discordModel);
         if (!isAdmin(user)) {
             JsonArray admins = getAuthJson("admin");
             admins.add(user);
@@ -33,14 +30,14 @@ public class AuthService {
 
             writeJsonObjectToAuthFile(jsonObject);
 
-            messageService.sendMessage(event, user + " added as admin!");
+            messageService.sendMessage(discordModel, user + " added as admin!");
         } else {
-            messageService.sendMessage(event,user + " is already an admin!");
+            messageService.sendMessage(discordModel,user + " is already an admin!");
         }
     }
 
-    public void removeAdmin(MessageReceivedEvent event) throws IOException {
-        String user = getFirstMentionedUser(event);
+    public void removeAdmin(DiscordModel discordModel) throws IOException {
+        String user = getFirstMentionedUser(discordModel);
         if (isAdmin(user)) {
             JsonElement element = new JsonPrimitive(user);
 
@@ -52,9 +49,9 @@ public class AuthService {
 
             writeJsonObjectToAuthFile(jsonObject);
 
-            messageService.sendMessage(event, user + " removed as admin!");
+            messageService.sendMessage(discordModel, user + " removed as admin!");
         } else {
-            messageService.sendMessage(event, user + " isn't an admin!");
+            messageService.sendMessage(discordModel, user + " isn't an admin!");
         }
     }
 
@@ -76,7 +73,7 @@ public class AuthService {
         return ResourceLoader.getAuthFile();
     }
 
-    private String getFirstMentionedUser(MessageReceivedEvent event) {
-        return event.getMessage().getMentionedUsers().get(0).getName();
+    private String getFirstMentionedUser(DiscordModel discordModel) {
+        return discordModel.getMentionedUsers().get(0).getName();
     }
 }

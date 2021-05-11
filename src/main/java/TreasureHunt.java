@@ -7,6 +7,43 @@ import java.util.HashMap;
 
 public class TreasureHunt {
 
+    MessageService messageService = new MessageService();
+
+    DiscordModel discordModel;
+
+    public TreasureHunt(DiscordModel discordModel) {
+        this.discordModel = discordModel;
+    }
+
+
+    public void addFirstClue(DiscordModel discordModel) {
+        messageService.sendMessage(discordModel, discordModel.getAuthor() + " , first clue added!");
+    }
+
+    public void removeFirstClue(DiscordModel discordModel) {
+
+    }
+
+    public void addSecondClue(DiscordModel discordModel) {
+
+    }
+
+    public void removeSecondClue(DiscordModel discordModel) {
+
+    }
+
+    public void addThirdClue(DiscordModel discordModel) {
+
+    }
+
+    public void removeThirdClue(DiscordModel discordModel) {
+
+    }
+
+    public void reset(DiscordModel discordModel) {
+
+    }
+
     public String firstClue() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(URIs.TREASURE_HUNT));
         Gson gson = new Gson();

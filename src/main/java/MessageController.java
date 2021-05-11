@@ -11,9 +11,12 @@ public class MessageController extends ListenerAdapter {
 
     MessageService messageService = new MessageService();
 
+    TreasureHunt treasureHunt;
+
         @Override
         public void onMessageReceived(@NotNull MessageReceivedEvent event) {
             DiscordModel discordModel = new DiscordModel(event.getMessage());
+            this.treasureHunt = new TreasureHunt(discordModel);
             try {
                 handleMessage(event, discordModel);
             } catch (IOException e) {
@@ -28,11 +31,11 @@ public class MessageController extends ListenerAdapter {
             }
 
             if (getCommand(event).contains("!addadmin")) {
-                addAdmin(event, discordModel);
+                addAdmin(discordModel);
             }
 
             if (getCommand(event).contains("!removeadmin")) {
-                removeAdmin(event, discordModel);
+                removeAdmin(discordModel);
             }
 
             // Admin commands
@@ -40,53 +43,83 @@ public class MessageController extends ListenerAdapter {
                 adminTest(event, discordModel);
             }
 
-            // Everyone commands
+            // Treasure Hunt commands
+            // TH Admin commands
+            if (getCommand(event).contains("!th")) {
+                if (authService.isAdmin(discordModel.getAuthor()) || authService.isOwner(discordModel.getAuthor())) {
+                    if (getCommand(event).contains("addfirstclue")) {
+                        treasureHunt.addFirstClue(discordModel);
+                    }
+
+                    if (getCommand(event).contains("removefirstclue")) {
+                        treasureHunt.removeFirstClue(discordModel);
+                    }
+
+                    if (getCommand(event).contains("addsecondclue")) {
+                        treasureHunt.addSecondClue(discordModel);
+                    }
+
+                    if (getCommand(event).contains("removesecondclue")) {
+                        treasureHunt.removeSecondClue(discordModel);
+                    }
+
+                    if (getCommand(event).contains("addthirdclue")) {
+                        treasureHunt.addThirdClue(discordModel);
+                    }
+
+                    if (getCommand(event).contains("removethirdclue")) {
+                        treasureHunt.removeThirdClue(discordModel);
+                    }
+
+                    if (getCommand(event).contains("reset")) {
+                        treasureHunt.reset(discordModel);
+                    }
+                } else {
+                    messageService.sendMessage(discordModel, discordModel.getAuthor()
+                            + " , you are not authorised to amend the Treasure Hunt");
+                }
+            }
+
+            // TH Everyone
             if (getCommand(event).equals("!treasurehunt")) {
-                treasureHuntTest(event);
+
             }
         }
 
-    private void addAdmin(MessageReceivedEvent event, DiscordModel discordModel) throws IOException {
+    private void addAdmin(DiscordModel discordModel) throws IOException {
             String author = discordModel.getAuthor();
             if (authService.isOwner(author)) {
-                authService.addAdmin(event);
+                authService.addAdmin(discordModel);
             } else {
-                messageService.sendMessage(event, author + " , you are not authorised to add admins!");
+                messageService.sendMessage(discordModel, author + " , you are not authorised to add admins!");
             }
     }
 
-    private void removeAdmin(MessageReceivedEvent event, DiscordModel discordModel) throws IOException {
+    private void removeAdmin(DiscordModel discordModel) throws IOException {
             String author = discordModel.getAuthor();
             if (authService.isOwner(author)) {
-                authService.removeAdmin(event);
+                authService.removeAdmin(discordModel);
             } else {
-                messageService.sendMessage(event, author + " , you are not authorised to remove admins!");
+                messageService.sendMessage(discordModel, author + " , you are not authorised to remove admins!");
             }
     }
 
-    private void treasureHuntTest(MessageReceivedEvent event) {
-        try {
-            TreasureHunt treasureHunt = new TreasureHunt();
-            messageService.sendMessage(event, treasureHunt.firstClue());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     private void adminTest(MessageReceivedEvent event, DiscordModel discordModel) throws FileNotFoundException {
         if (authService.isAdmin(discordModel.getAuthor())) {
-            messageService.sendMessage(event,"Success!");
+            messageService.sendMessage(discordModel,"Success!");
         } else {
-            messageService.sendMessage(event,"Rekt");
+            messageService.sendMessage(discordModel,"Rekt");
         }
     }
 
     private void ownerTest(MessageReceivedEvent event, DiscordModel discordModel) throws FileNotFoundException {
             String author = discordModel.getAuthor();
         if (authService.isOwner(author)) {
-            messageService.sendMessage(event, "Owner test successful, " + author + "!");
+            messageService.sendMessage(discordModel, "Owner test successful, " + author + "!");
         } else {
-            messageService.sendMessage(event,"You are not the owner, " + author + "!");
+            messageService.sendMessage(discordModel,"You are not the owner, " + author + "!");
         }
     }
 

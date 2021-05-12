@@ -1,19 +1,12 @@
 package uk.co.thomasbooker.spritofnirn;
 
-import net.dv8tion.jda.api.JDABuilder;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.security.auth.login.LoginException;
-import java.io.IOException;
-
+@SpringBootApplication
 public class Controller {
 
-    public static void main(String[] args) throws IOException, LoginException {
-        startBot();
-    }
-    
-    private static void startBot() throws IOException, LoginException {
-        JDABuilder.createDefault(ResourceLoader.getDiscordToken())
-                .addEventListeners(new MessageController())
-                .build();
+    public static void main(String[] args) {
+        SpringApplication.run(Controller.class, args);
     }
 }

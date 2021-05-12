@@ -1,6 +1,8 @@
 package uk.co.thomasbooker.spritofnirn;
 
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,17 +11,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@Component
 public class TreasureHunt {
 
-    MessageService messageService = new MessageService();
+    @Autowired
+    MessageService messageService;
 
     DiscordModel discordModel;
 
-    JsonFileService jsonFileService = new JsonFileService();
-
-    public TreasureHunt(DiscordModel discordModel) {
-        this.discordModel = discordModel;
-    }
+    @Autowired
+    JsonFileService jsonFileService;
 
     public void getFirstClueWithPermissionsCheck(DiscordModel discordModel) throws FileNotFoundException {
         messageService.sendMessage(discordModel, jsonFileService.getFirstClueWithPermissionsCheck(discordModel));

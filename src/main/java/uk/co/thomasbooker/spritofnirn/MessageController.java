@@ -1,32 +1,29 @@
 package uk.co.thomasbooker.spritofnirn;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class MessageController extends ListenerAdapter {
+@Component
+public class MessageController {
 
-    AuthService authService = new AuthService();
+    @Autowired
+    AuthService authService;
 
-    MessageService messageService = new MessageService();
+    @Autowired
+    MessageService messageService;
 
+    @Autowired
     TreasureHunt treasureHunt;
 
-        @Override
-        public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-            DiscordModel discordModel = new DiscordModel(event.getMessage());
-            this.treasureHunt = new TreasureHunt(discordModel);
-            try {
-                handleMessage(event, discordModel);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    @Autowired
+    DiscordModel discordModel;
 
-        private void handleMessage(MessageReceivedEvent event, DiscordModel discordModel) throws IOException {
+        public void handleMessage(MessageReceivedEvent event) throws IOException {
+            discordModel.setupDiscordModel(event.getMessage());
             // Owner commands
             if (getCommand(event).equals("!owner")) {
                 ownerTest(event, discordModel);

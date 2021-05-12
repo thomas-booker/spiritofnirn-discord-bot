@@ -1,9 +1,15 @@
 package uk.co.thomasbooker.spritofnirn;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 
+@Component
 public class AuthService {
-    MessageService messageService = new MessageService();
+
+    @Autowired
+    MessageService messageService;
 
     JsonFileService jsonFileService = new JsonFileService();
 

@@ -4,9 +4,11 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DiscordModel {
 
     // Message event
@@ -20,7 +22,7 @@ public class DiscordModel {
     // Users
     List<User> mentionedUsers;
 
-    public DiscordModel(Message message) {
+    public void setupDiscordModel(Message message) {
         this.author = message.getAuthor().getName();
         this.member = message.getMember();
 
@@ -28,7 +30,6 @@ public class DiscordModel {
         this.messageChannel = message.getChannel();
 
         this.mentionedUsers = message.getMentionedUsers();
-
     }
 
     public String getAuthor() {

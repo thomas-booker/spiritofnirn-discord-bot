@@ -1,12 +1,14 @@
 package uk.co.thomasbooker.spritofnirn;
 
 import com.google.gson.*;
+import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Component
 public class JsonFileService {
     private static final String OWNER = "owner";
     private static final String ADMIN = "admin";

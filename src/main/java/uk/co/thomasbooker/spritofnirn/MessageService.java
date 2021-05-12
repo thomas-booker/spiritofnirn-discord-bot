@@ -1,4 +1,4 @@
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+package uk.co.thomasbooker.spritofnirn;
 
 public class MessageService {
 

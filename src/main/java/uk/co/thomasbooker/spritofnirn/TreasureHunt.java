@@ -1,6 +1,6 @@
+package uk.co.thomasbooker.spritofnirn;
+
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

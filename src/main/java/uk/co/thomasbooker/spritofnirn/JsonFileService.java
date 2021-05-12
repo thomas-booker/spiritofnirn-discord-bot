@@ -1,10 +1,11 @@
+package uk.co.thomasbooker.spritofnirn;
+
 import com.google.gson.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class JsonFileService {
     private static final String OWNER = "owner";

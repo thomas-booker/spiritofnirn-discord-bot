@@ -1,7 +1,6 @@
-import com.google.gson.Gson;
+package uk.co.thomasbooker.spritofnirn;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.Properties;
 
 public class ResourceLoader {

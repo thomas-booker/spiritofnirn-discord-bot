@@ -1,3 +1,5 @@
+package uk.co.thomasbooker.spritofnirn;
+
 public interface URIs {
 
     // Resource files

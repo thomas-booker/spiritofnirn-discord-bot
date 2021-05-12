@@ -1,5 +1,4 @@
-import com.google.gson.*;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+package uk.co.thomasbooker.spritofnirn;
 
 import java.io.*;
 

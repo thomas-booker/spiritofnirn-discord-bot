@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Properties;
 
 public class ResourceLoader {
-    public static String getDiscordToken() throws IOException {
+    public static String getDiscordToken() {
         return getResourceFile(URIs.SPIRITOFNIRN_PROPERTIES).getProperty("TOKEN");
     }
 
@@ -14,6 +14,14 @@ public class ResourceLoader {
 
     public static BufferedReader getTreasureHuntFile() throws FileNotFoundException {
         return getFile(URIs.TREASURE_HUNT);
+    }
+
+    public static BufferedReader getInsultsFile() throws FileNotFoundException {
+        return getFile(URIs.INSULTS);
+    }
+
+    public static BufferedReader getComplimentsFile() throws FileNotFoundException {
+        return getFile(URIs.COMPLIMENTS);
     }
 
     public static BufferedReader getFile(String URI) throws FileNotFoundException {

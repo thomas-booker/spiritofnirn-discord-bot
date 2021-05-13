@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default">
+<head>
+  <title>Spirit of Nirn Discord Bot - Readme</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <h1>Spirit of Nirn Discord Bot - Readme</h1>
+
+  <h2>Introduction</h2>
+  <p>Welcome to the Spirit of Nirn Discord Bot</p>
+  <p>Here are the commands that the bot currently supports, separated by permission access</p>
+  <p>If you have any questions or need support, email EMAIL_ADDRESS</p>
+
+  <h2>Bot Commands</h2>
+  <table class="table table-striped table-bordered table-sm">
+    <thead>
+    <tr>
+      <th scope="col">Command</th>
+      <th scope="col">Permission</th>
+      <th scope="col">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="table-primary">
+      <td>!AddAdmin</td>
+      <td>Owners</td>
+      <td>Adds an owner to permissions group</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+<th:block layout:fragment="scripts">
+
+</th:block>
+</html>

@@ -13,10 +13,20 @@ public class WebController {
     @Autowired
     SpiritOfNirnBot spiritOfNirnBot;
 
+    @RequestMapping("/")
+    public String index() {
+        return "index";
+    }
+
     @RequestMapping("/test")
     public String testWeb() {
 //        spiritOfNirnBot.jda.getTextChannelById(826903298250113094L).sendMessage("test").queue();
         messageService.sendMessage(826903298250113094L, "Web portal test");
         return "test";
+    }
+
+    @RequestMapping("/readme")
+    public String readme() {
+        return "readme";
     }
 }

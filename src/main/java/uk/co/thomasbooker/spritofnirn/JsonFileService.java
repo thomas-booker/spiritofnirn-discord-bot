@@ -127,12 +127,31 @@ public class JsonFileService {
         writeJsonObjectToTreasureHuntFile(fullTreasureHuntFile);
     }
 
+    public void removeFirstClue() throws IOException {
+        JsonObject fullTreasureHuntFile = getTreasureHuntFile();
+        JsonObject firstClueElement = fullTreasureHuntFile.getAsJsonObject("firstClue");
+
+        firstClueElement.addProperty("message", "");
+        firstClueElement.addProperty("permission", "admins");
+
+        fullTreasureHuntFile.add("firstClue", firstClueElement);
+
+        writeJsonObjectToTreasureHuntFile(fullTreasureHuntFile);
+    }
+
     public void addSecondClue(DiscordModel discordModel) throws IOException {
         JsonObject fullTreasureHuntFile = getTreasureHuntFile();
 
         String[] message = discordModel.getRawContent().split("!th-addsecondclue");
 
         fullTreasureHuntFile.addProperty("secondClue", message[1]);
+
+        writeJsonObjectToTreasureHuntFile(fullTreasureHuntFile);
+    }
+
+    public void removeSecondClue() throws IOException {
+        JsonObject fullTreasureHuntFile = getTreasureHuntFile();
+        fullTreasureHuntFile.addProperty("secondClue", "");
 
         writeJsonObjectToTreasureHuntFile(fullTreasureHuntFile);
     }
@@ -145,6 +164,40 @@ public class JsonFileService {
         fullTreasureHuntFile.addProperty("thirdClue", message[1]);
 
         writeJsonObjectToTreasureHuntFile(fullTreasureHuntFile);
+    }
+
+    public void removeThirdClue() throws IOException {
+        JsonObject fullTreasureHuntFile = getTreasureHuntFile();
+        fullTreasureHuntFile.addProperty("thirdClue", "");
+
+        writeJsonObjectToTreasureHuntFile(fullTreasureHuntFile);
+    }
+
+    // Insults
+    public String getRandomInsult() throws FileNotFoundException {
+        JsonArray insultsFile = getInsultsFile();
+
+        int random = (int)(Math.random() * insultsFile.size());
+
+        return insultsFile.get(random).toString();
+    }
+
+    // Compliments
+
+    public String getRandomCompliment() throws FileNotFoundException {
+        JsonArray complimentsFile = getComplimentsFile();
+
+        int random = (int)(Math.random() * complimentsFile.size());
+
+        return complimentsFile.get(random).toString();
+    }
+
+    private JsonArray getComplimentsFile() throws FileNotFoundException {
+        return gson.fromJson(ResourceLoader.getComplimentsFile(), JsonArray.class);
+    }
+
+    private JsonArray getInsultsFile() throws FileNotFoundException {
+        return gson.fromJson(ResourceLoader.getInsultsFile(), JsonArray.class);
     }
 
     private JsonObject getTreasureHuntFile() throws FileNotFoundException {

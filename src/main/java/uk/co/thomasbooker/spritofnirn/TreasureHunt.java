@@ -43,8 +43,8 @@ public class TreasureHunt {
         messageService.sendMessage(discordModel, discordModel.getAuthor() + " , first clue added!");
     }
 
-    public void removeFirstClue(DiscordModel discordModel) {
-
+    public void removeFirstClue() throws IOException {
+        jsonFileService.removeFirstClue();
     }
 
     public void addSecondClue(DiscordModel discordModel) throws IOException {
@@ -52,8 +52,8 @@ public class TreasureHunt {
         messageService.sendMessage(discordModel, discordModel.getAuthor() + " , second clue added!");
     }
 
-    public void removeSecondClue(DiscordModel discordModel) {
-
+    public void removeSecondClue() throws IOException {
+        jsonFileService.removeSecondClue();
     }
 
     public void addThirdClue(DiscordModel discordModel) throws IOException {
@@ -61,8 +61,8 @@ public class TreasureHunt {
         messageService.sendMessage(discordModel, discordModel.getAuthor() + " , third clue added!");
     }
 
-    public void removeThirdClue(DiscordModel discordModel) {
-
+    public void removeThirdClue() throws IOException {
+        jsonFileService.removeThirdClue();
     }
 
     public void reset() throws IOException {

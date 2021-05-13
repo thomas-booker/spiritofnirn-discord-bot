@@ -22,6 +22,12 @@ public class MessageController {
     @Autowired
     DiscordModel discordModel;
 
+    @Autowired
+    Insults insults;
+
+    @Autowired
+    Compliments compliments;
+
         public void handleMessage(MessageReceivedEvent event) throws IOException {
             discordModel.setupDiscordModel(event.getMessage());
             // Owner commands
@@ -59,7 +65,7 @@ public class MessageController {
                     }
 
                     if (getCommand(event).contains("!th-removefirstclue")) {
-                        treasureHunt.removeFirstClue(discordModel);
+                        treasureHunt.removeFirstClue();
                     }
 
                     if (getCommand(event).contains("!th-getsecondclue")) {
@@ -71,7 +77,7 @@ public class MessageController {
                     }
 
                     if (getCommand(event).contains("!th-removesecondclue")) {
-                        treasureHunt.removeSecondClue(discordModel);
+                        treasureHunt.removeSecondClue();
                     }
 
                     if (getCommand(event).contains("!th-getthirdclue")) {
@@ -83,7 +89,7 @@ public class MessageController {
                     }
 
                     if (getCommand(event).contains("!th-removethirdclue")) {
-                        treasureHunt.removeThirdClue(discordModel);
+                        treasureHunt.removeThirdClue();
                     }
 
                     if (getCommand(event).contains("!th-reset")) {
@@ -98,6 +104,14 @@ public class MessageController {
             // TH Everyone
             if (getCommand(event).equals("!treasurehunt")) {
                 treasureHunt.getFirstClueWithPermissionsCheck(discordModel);
+            }
+
+            if (getCommand(event).contains("!insult")) {
+                insults.insultHandler(discordModel);
+            }
+
+            if (getCommand(event).contains("!compliment")) {
+                compliments.complimentHandler(discordModel);
             }
         }
 

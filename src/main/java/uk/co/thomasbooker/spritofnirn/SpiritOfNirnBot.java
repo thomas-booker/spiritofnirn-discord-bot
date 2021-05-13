@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.security.auth.login.LoginException;
-import java.io.IOException;
 
 @Component
 public class SpiritOfNirnBot extends ListenerAdapter {
@@ -19,7 +18,7 @@ public class SpiritOfNirnBot extends ListenerAdapter {
     JDA jda;
 
     @PostConstruct
-    private void startBot() throws IOException, LoginException {
+    private void startBot() throws LoginException {
         this.jda = JDABuilder.createDefault(ResourceLoader.getDiscordToken())
                 .addEventListeners(messageListener)
                 .build();

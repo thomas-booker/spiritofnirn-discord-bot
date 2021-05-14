@@ -20,7 +20,6 @@ public class WebController {
 
     @RequestMapping("/test")
     public String testWeb() {
-//        spiritOfNirnBot.jda.getTextChannelById(826903298250113094L).sendMessage("test").queue();
         messageService.sendMessage(826903298250113094L, "Web portal test");
         return "test";
     }
@@ -28,5 +27,10 @@ public class WebController {
     @RequestMapping("/readme")
     public String readme() {
         return "readme";
+    }
+
+    @RequestMapping("/home")
+    public String home() {
+        return "home";
     }
 }

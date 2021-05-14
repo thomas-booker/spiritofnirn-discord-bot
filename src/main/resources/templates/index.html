@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default">
+<head>
+  <title>Spirit of Nirn Discord Bot - Readme</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="header">
+    <div class="info">
+      <h4>An Elder Scrolls Online guild</h4>
+      <h1 class="display-2">Spirit of Nirn</h1>
+      <h4>Discord bot</h4>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Readme</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div layout:fragment="homepage">
+    Page content goes here
+  </div>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+
+</th:block>
+</html>

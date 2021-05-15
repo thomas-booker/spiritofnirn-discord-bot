@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Girassol&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Girassol&family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=KoHo:wght@500&family=Noto+Sans+JP:wght@100&display=swap');
 html,body{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 .nav-center {
   display:flex;
   justify-content: center;
+}
+
+body {
+  background: #ffdab3;
 }
 
 h2 {
@@ -16,7 +18,7 @@ h2 {
 
 h1 {
     font-size: 8em;
-    font-family: 'Lato', sans-serif;
+    font-family: 'KoHo', sans-serif;
 }
 
 .fullHeight {
@@ -77,7 +79,7 @@ body{
     -webkit-transform: translateZ(0); backface-visibility: hidden;
   scale(1.0, 1.0);
     transform: translateZ(0);
-  background:#1B2030 url(../img/482951.jpg) 50% 0 no-repeat;
+  background:#1B2030 url(../img/blackwood.jpg) 50% 0 no-repeat;
   background-size:100%;
   background-attachment:fixed;
   animation: grow 360s  linear 10ms infinite;
@@ -89,7 +91,7 @@ body{
   width:100%;
   padding:5% 10% 0 10%;
   text-align:center;
-  text-shadow:2px 2px 8px rgb(4, 43, 82), 0 0 5px rgb(66, 239, 153);
+  text-shadow:2px 2px 8px #993300, 0 0 5px #e64d00;
 }
 
 .info h4, .meta{

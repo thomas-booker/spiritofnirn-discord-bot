@@ -5,25 +5,48 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Spirit of Nirn Discord Bot</title>
-
-  <link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap-theme.min.css"/>
-  <link rel="stylesheet" type="text/css" media="all" href="../static/css/index.css" th:href="@{/css/index.css}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/default.css}"/>
 </head>
 <body>
+<header>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10" layout:fragment="content">
-      Page content goes here
+    <div class="header">
+      <div class="info">
+        <h1>Spirit of Nirn</h1>
+      </div>
     </div>
-    <div class="col-md-1"></div>
+        <nav class="blue-grey darken-3">
+          <div class="nav-wrapper" id="navbarSupportedContent">
+            <ul id="nav-mobile" class="hide-on-med-and-down nav-center">
+              <li>
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li>
+                <a class="nav-link" href="/admins">Admins</a>
+              </li>
+              <li>
+                <a class="nav-link" href="/instructions">Instructions</a>
+              </li>
+              <li>
+                <a class="nav-link" href="/about">About</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+</header>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col s12" layout:fragment="content">
+        Page content goes here
+      </div>
+    </div>
   </div>
-</div>
+</main>
 
-<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-<script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <th:block layout:fragment="scripts"></th:block>
 </body>
 </html>

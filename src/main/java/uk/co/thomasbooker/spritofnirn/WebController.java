@@ -24,13 +24,23 @@ public class WebController {
         return "test";
     }
 
-    @RequestMapping("/readme")
+    @RequestMapping("/instructions")
     public String readme() {
-        return "readme";
+        return "instructions";
     }
 
     @RequestMapping("/home")
     public String home() {
         return "home";
+    }
+
+    @RequestMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @RequestMapping("/admins")
+    public String admins() {
+        return "admins";
     }
 }

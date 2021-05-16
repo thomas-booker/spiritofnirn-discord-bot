@@ -43,11 +43,6 @@ public class MessageController {
                 removeAdmin(discordModel);
             }
 
-            // Admin commands
-            if (getCommand(event).equals("!admin")) {
-                adminTest(event, discordModel);
-            }
-
             // Treasure Hunt commands
             // TH Admin commands
             if (getCommand(event).contains("!th")) {

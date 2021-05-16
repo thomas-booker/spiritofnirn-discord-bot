@@ -6,12 +6,15 @@ import org.springframework.stereotype.Component;
 import java.io.FileNotFoundException;
 
 @Component
-public class Insults extends Interactions {
+public class Insults {
 
     @Autowired
     JsonFileService jsonFileService;
 
+    @Autowired
+    Interactions interaction;
+
     public void insultHandler(DiscordModel discordModel) throws FileNotFoundException {
-        sendInteraction(discordModel, jsonFileService.getRandomInsult().replaceAll("\"", ""));
+        interaction.sendInteraction(discordModel, jsonFileService.getRandomInsult().replaceAll("\"", ""));
     }
 }

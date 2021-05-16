@@ -11,7 +11,8 @@ public class AuthService {
     @Autowired
     MessageService messageService;
 
-    JsonFileService jsonFileService = new JsonFileService();
+    @Autowired
+    JsonFileService jsonFileService;
 
     public boolean isOwner(String user) throws FileNotFoundException {
         return jsonFileService.isOwner(user);

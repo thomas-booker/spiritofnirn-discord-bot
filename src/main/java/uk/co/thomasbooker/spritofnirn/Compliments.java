@@ -6,12 +6,15 @@ import org.springframework.stereotype.Component;
 import java.io.FileNotFoundException;
 
 @Component
-public class Compliments extends Interactions {
+public class Compliments{
 
     @Autowired
     JsonFileService jsonFileService;
 
+    @Autowired
+    Interactions interaction;
+
     public void complimentHandler(DiscordModel discordModel) throws FileNotFoundException {
-        sendInteraction(discordModel, jsonFileService.getRandomCompliment().replaceAll("\"", ""));
+        interaction.sendInteraction(discordModel, jsonFileService.getRandomCompliment().replaceAll("\"", ""));
     }
 }

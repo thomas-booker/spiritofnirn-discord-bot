@@ -2,11 +2,21 @@
 
 ### About
 
-This bot will serve The Elder Scrolls Online guild, Spirit of Nirn's Discord server.
+This Discord bot has been created primarily for The Spirit of Nirn, an Elder Scrolls Online guild.
 
-### Planned functionality
+### Current functionality v 1.0
+
+* Treasure Hunt service
+* Insults service
+* Compliments service
+
+### Planned functionality v 2.0
 
 * Lore service
-* Treasure hunt event support
-* Dungeon mechanics
-* And more...
+* Dungeon mechanics service
+* Build service
+
+### Future
+
+* Discord mini-games
+* ... and more!

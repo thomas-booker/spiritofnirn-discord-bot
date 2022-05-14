@@ -4,6 +4,18 @@
 
 This Discord bot has been created primarily for The Spirit of Nirn, an Elder Scrolls Online guild.
 
+### Requirements
+#### auth.json
+{
+"owner": [
+"XXX"
+],
+"admin": [
+"XXX",
+"XXX"
+]
+}
+
 ### Current functionality v 1.0
 
 * Treasure Hunt service

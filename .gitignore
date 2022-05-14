@@ -1,5 +1,5 @@
 #spiritofnirn.properties
-*.json
+#*.json
 
 # Project exclude paths
 /.gradle/

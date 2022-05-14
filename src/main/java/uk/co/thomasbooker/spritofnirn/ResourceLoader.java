@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class ResourceLoader {
     public static String getDiscordToken() {
-        return getResourceFile(URIs.SPIRITOFNIRN_PROPERTIES).getProperty("TOKEN");
+        return System.getenv("DISCORD_TOKEN");
     }
 
     public static BufferedReader getAuthFile() throws FileNotFoundException {

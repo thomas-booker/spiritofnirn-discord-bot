@@ -17,16 +17,16 @@ public class TrialMember {
 
     private String role;
 
-    private Long trailId;
+    private Long trialId;
 
     public TrialMember() {
     }
 
-    public TrialMember(Long id, String name, String role, Long trailId) {
+    public TrialMember(Long id, String name, String role, Long trialId) {
         this.id = id;
         this.name = name;
         this.role = role;
-        this.trailId = trailId;
+        this.trialId = trialId;
     }
 
     public Long getId() {
@@ -41,8 +41,8 @@ public class TrialMember {
         return role;
     }
 
-    public Long getTrailId() {
-        return trailId;
+    public Long getTrialId() {
+        return trialId;
     }
 
     public void setId(Long id) {
@@ -57,8 +57,8 @@ public class TrialMember {
         this.role = role;
     }
 
-    public void setTrailId(Long trailId) {
-        this.trailId = trailId;
+    public void setTrialId(Long trialId) {
+        this.trialId = trialId;
     }
 
     public TrialMember withId(Long id) {
@@ -77,7 +77,7 @@ public class TrialMember {
     }
 
     public TrialMember withTrailId(Long trailId) {
-        this.trailId = trailId;
+        this.trialId = trailId;
         return this;
     }
 
@@ -86,12 +86,12 @@ public class TrialMember {
         if (this == o) return true;
         if (!(o instanceof TrialMember)) return false;
         TrialMember that = (TrialMember) o;
-        return getId().equals(that.getId()) && getName().equals(that.getName()) && getRole().equals(that.getRole()) && getTrailId().equals(that.getTrailId());
+        return getId().equals(that.getId()) && getName().equals(that.getName()) && getRole().equals(that.getRole()) && getTrialId().equals(that.getTrialId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getRole(), getTrailId());
+        return Objects.hash(getId(), getName(), getRole(), getTrialId());
     }
 
     @Override
@@ -100,7 +100,7 @@ public class TrialMember {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", role='" + role + '\'' +
-                ", trailId=" + trailId +
+                ", trialId=" + trialId +
                 '}';
     }
 

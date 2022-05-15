@@ -4,6 +4,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -13,6 +14,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = "uk.co.thomasbooker.repository")
 @EnableTransactionManagement
 public class Controller {
 

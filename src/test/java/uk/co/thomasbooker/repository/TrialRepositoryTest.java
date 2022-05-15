@@ -15,18 +15,18 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(
-        classes = { Controller.class },
-        loader = AnnotationConfigContextLoader.class)
-@Transactional
+//@ExtendWith(SpringExtension.class)
+//@ContextConfiguration(
+//        classes = { Controller.class },
+//        loader = AnnotationConfigContextLoader.class)
+//@Transactional
 class TrialRepositoryTest {
-
-    @Resource
-    private TrialRepository trialRepository;
-
-    @Test
-    void shouldStoreTrial(){
+//
+//    @Resource
+//    private TrialRepository trialRepository;
+//
+//    @Test
+//    void shouldStoreTrial(){
 //        // Given
 //        String expectedName = "Test Trial 1";
 //        LocalDateTime expectedDateTime = LocalDateTime.now();
@@ -46,6 +46,6 @@ class TrialRepositoryTest {
 //        assertThat(retrievedTrial.getName()).isEqualTo(expectedName);
 //        assertThat(retrievedTrial.getStartTime()).isEqualTo(expectedDateTime);
 //        assertThat(retrievedTrial.getOwner()).isEqualTo(expectedOwner);
-    }
+//    }
 
 }

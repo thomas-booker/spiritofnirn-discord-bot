@@ -108,6 +108,26 @@ public class MessageController {
             if (getCommand(event).contains("!compliment")) {
                 compliments.complimentHandler(discordModel);
             }
+
+            // Raidplanner Service Commands
+            if (getChannel(event).equals(Channels.SPIRIT_DISCORD_BOT)) {
+                if (getCommand(event).equals("!setupraid")) {
+                    messageService.sendMessage(discordModel, "Raid Added Successfully");
+                }
+                if(getCommand(event).equals("!removeraid")) {
+
+                }
+                if(getCommand(event).equals("!addmember")) {
+
+                }
+                if(getCommand(event).equals("!removemember")) {
+
+                }
+                if(getCommand(event).equals("!gettrial")) {
+
+                }
+            }
+
         }
 
     private void addAdmin(DiscordModel discordModel) throws IOException {
@@ -149,5 +169,9 @@ public class MessageController {
 
     private String getCommand(MessageReceivedEvent event) {
             return event.getMessage().getContentRaw();
+    }
+
+    private String getChannel(MessageReceivedEvent event) {
+            return event.getChannel().getName();
     }
 }

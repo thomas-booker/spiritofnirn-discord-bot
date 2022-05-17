@@ -6,7 +6,7 @@ import uk.co.thomasbooker.repository.TrialRepository;
 public class CreateTrial {
 
     TrialRepository trialRepository;
-    
+
     public void execute(Trial trial) {
         if (!exists(trial.getId())) {
             trialRepository.save(trial);

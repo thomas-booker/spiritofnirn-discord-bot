@@ -32,8 +32,8 @@ public class SetupTrialCommandHandler extends TrialCommandHandler {
         try {
             trialDateAndTime = TrialDateTimeFormatter.parseTimeStringAndDateString(trialCommandDetails.getCommandArgument(1), trialCommandDetails.getCommandArgument(2));
         } catch (DateTimeParseException dateTimeParseException){
-            trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
-                    .sendMessage("Could not read date" + trialCommandDetails.getCommandArgument(1) + " " + trialCommandDetails.getCommandArgument(2)).queue();
+            discord.sendMessage(trialCommandDetails.getEvent().getChannel(),
+                    "Could not read date" + trialCommandDetails.getCommandArgument(1) + " " + trialCommandDetails.getCommandArgument(2));
             return;
         }
 
@@ -43,10 +43,10 @@ public class SetupTrialCommandHandler extends TrialCommandHandler {
                 .withOwner(trialCommandDetails.getEvent().getAuthor().getName());
         trialRepository.save(trialToSetup);
 
-        trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
-                .sendMessage(trialToSetup.getName() + " is set to start at "
+        discord.sendMessage(trialCommandDetails.getEvent().getChannel(),
+                trialToSetup.getName() + " is set to start at "
                         + TrialDateTimeFormatter.parseLocalTime(trialToSetup.getStartDateTime()) + " on the "
-                        + TrialDateTimeFormatter.parseLocalDate(trialToSetup.getStartDateTime())).queue();
+                        + TrialDateTimeFormatter.parseLocalDate(trialToSetup.getStartDateTime()));
     }
 
 }

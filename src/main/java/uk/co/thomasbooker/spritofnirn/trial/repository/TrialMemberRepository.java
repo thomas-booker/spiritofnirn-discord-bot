@@ -1,7 +1,7 @@
-package uk.co.thomasbooker.repository;
+package uk.co.thomasbooker.spritofnirn.trial.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import uk.co.thomasbooker.model.TrialMember;
+import uk.co.thomasbooker.spritofnirn.trial.model.TrialMember;
 
 import java.util.List;
 

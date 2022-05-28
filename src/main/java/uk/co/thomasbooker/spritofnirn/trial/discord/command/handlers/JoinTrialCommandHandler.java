@@ -1,14 +1,12 @@
 package uk.co.thomasbooker.spritofnirn.trial.discord.command.handlers;
 
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import uk.co.thomasbooker.spritofnirn.trial.discord.TrialCommandDetails;
 import uk.co.thomasbooker.spritofnirn.trial.model.Trial;
 import uk.co.thomasbooker.spritofnirn.trial.model.TrialMember;
 import uk.co.thomasbooker.spritofnirn.trial.repository.TrialMemberRepository;
 import uk.co.thomasbooker.spritofnirn.trial.repository.TrialRepository;
-
-import java.util.List;
 
 @Component
 public class JoinTrialCommandHandler extends TrialCommandHandler {
@@ -30,20 +28,23 @@ public class JoinTrialCommandHandler extends TrialCommandHandler {
     }
 
     @Override
-    void handleCommand(MessageReceivedEvent event, List<String> commandArguments) {
-        Trial trialToJoin = trialRepository.findByName(commandArguments.get(0));
+    void handleCommand(TrialCommandDetails trialCommandDetails) {
+        String trialName = trialCommandDetails.getCommandArgument(0);
+        Trial trialToJoin = trialRepository.findByName(trialName);
         if (trialToJoin == null) {
-            event.getJDA().getTextChannelById(event.getChannel().getId()).sendMessage("Could not find trial " + commandArguments.get(0)).queue();
+            trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
+                    .sendMessage("Could not find trial " + trialName).queue();
             return;
         }
 
         TrialMember joiningTrialMember = new TrialMember()
-                .withName(event.getAuthor().getName())
-                .withRole(commandArguments.get(1))
+                .withName(trialCommandDetails.getEvent().getAuthor().getName())
+                .withRole(trialCommandDetails.getCommandArgument(1))
                 .withTrailId(trialToJoin.getId());
         trialMemberRepository.save(joiningTrialMember);
 
-        event.getJDA().getTextChannelById(event.getChannel().getId()).sendMessage(joiningTrialMember.getName() + " has joined the " + joiningTrialMember.getName() + " trial as a " + joiningTrialMember.getRole()).queue();
+        trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
+                .sendMessage(joiningTrialMember.getName() + " has joined the " + trialToJoin.getName() + " trial as a " + joiningTrialMember.getRole()).queue();
     }
 
 }

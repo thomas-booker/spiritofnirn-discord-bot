@@ -1,10 +1,7 @@
 package uk.co.thomasbooker.spritofnirn.trial.discord.command.handlers;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import uk.co.thomasbooker.spritofnirn.trial.discord.TrialCommandDetails;
 
 public abstract class TrialCommandHandler {
 
@@ -13,12 +10,13 @@ public abstract class TrialCommandHandler {
             return;
         }
 
-        if (hasUnexpectedNumberOfArguments(event)) {
+        TrialCommandDetails trialCommandDetails = new TrialCommandDetails(event);
+        if (trialCommandDetails.hasUnexpectedNumberOfArguments(getNumberOfExpectedArguments())) {
             event.getJDA().getTextChannelById(event.getChannel().getId()).sendMessage("Expected " + getNumberOfExpectedArguments() + " arguments").queue();
             return;
         }
 
-        handleCommand(event, parseCommandArguments(event));
+        handleCommand(trialCommandDetails);
     }
 
     private boolean commandNotTriggered(MessageReceivedEvent event) {
@@ -27,22 +25,8 @@ public abstract class TrialCommandHandler {
 
     abstract String getCommandName();
 
-    private boolean hasUnexpectedNumberOfArguments(MessageReceivedEvent event) {
-        return getNumberOfExpectedArguments() == parseCommandArguments(event).size();
-    }
-
     abstract int getNumberOfExpectedArguments();
 
-    List<String> parseCommandArguments(MessageReceivedEvent event) {
-        return Arrays.asList(event.getMessage().getContentRaw()
-                        .replace("!" + getCommandName(), "")
-                        .strip()
-                        .split(","))
-                .stream()
-                .map(String::strip)
-                .collect(Collectors.toList());
-    }
-
-    abstract void handleCommand(MessageReceivedEvent event, List<String> commandArguments);
+    abstract void handleCommand(TrialCommandDetails trialCommandDetails) ;
 
 }

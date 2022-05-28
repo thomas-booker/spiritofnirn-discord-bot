@@ -37,13 +37,11 @@ public class TrialDetailsCommandHandler extends TrialCommandHandler {
                     .sendMessage("Could not find trial " + trialCommandDetails.getCommandArgument(0)).queue();
             return;
         }
-        trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
-                .sendMessage(trial.toString()).queue();
+
+        discord.sendMessage(trialCommandDetails.getEvent().getChannel(), trial.toString());
 
         List<TrialMember> trialMembers = trialMemberRepository.findByTrialId(trial.getId());
-        trialMembers.forEach(trialMember ->
-                trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
-                        .sendMessage(trialMember.toString()).queue());
+        trialMembers.forEach(trialMember -> discord.sendMessage(trialCommandDetails.getEvent().getChannel(), trialMember.toString()));
     }
 
 }

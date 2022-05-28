@@ -32,8 +32,7 @@ public class JoinTrialCommandHandler extends TrialCommandHandler {
         String trialName = trialCommandDetails.getCommandArgument(0);
         Trial trialToJoin = trialRepository.findByName(trialName);
         if (trialToJoin == null) {
-            trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
-                    .sendMessage("Could not find trial " + trialName).queue();
+            discord.sendMessage(trialCommandDetails.getEvent().getChannel(), "Could not find trial " + trialName);
             return;
         }
 
@@ -43,8 +42,8 @@ public class JoinTrialCommandHandler extends TrialCommandHandler {
                 .withTrailId(trialToJoin.getId());
         trialMemberRepository.save(joiningTrialMember);
 
-        trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
-                .sendMessage(joiningTrialMember.getName() + " has joined the " + trialToJoin.getName() + " trial as a " + joiningTrialMember.getRole()).queue();
+        discord.sendMessage(trialCommandDetails.getEvent().getChannel(),
+                joiningTrialMember.getName() + " has joined the " + trialToJoin.getName() + " trial as a " + joiningTrialMember.getRole());
     }
 
 }

@@ -1,9 +1,14 @@
 package uk.co.thomasbooker.spritofnirn.trial.discord.command.handlers;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import uk.co.thomasbooker.spritofnirn.discord.DiscordService;
 import uk.co.thomasbooker.spritofnirn.trial.discord.TrialCommandDetails;
 
 public abstract class TrialCommandHandler {
+
+    @Autowired
+    DiscordService discord;
 
     public void handleCommandIfTriggered(MessageReceivedEvent event) {
         if (commandNotTriggered(event)) {
@@ -12,7 +17,7 @@ public abstract class TrialCommandHandler {
 
         TrialCommandDetails trialCommandDetails = new TrialCommandDetails(event);
         if (trialCommandDetails.hasUnexpectedNumberOfArguments(getNumberOfExpectedArguments())) {
-            event.getJDA().getTextChannelById(event.getChannel().getId()).sendMessage("Expected " + getNumberOfExpectedArguments() + " arguments").queue();
+            discord.sendMessage(event.getChannel(), "Expected " + getNumberOfExpectedArguments() + " arguments");
             return;
         }
 

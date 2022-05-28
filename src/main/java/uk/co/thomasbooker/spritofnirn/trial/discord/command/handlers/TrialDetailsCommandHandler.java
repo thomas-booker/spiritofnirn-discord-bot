@@ -1,8 +1,8 @@
 package uk.co.thomasbooker.spritofnirn.trial.discord.command.handlers;
 
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import uk.co.thomasbooker.spritofnirn.trial.discord.TrialCommandDetails;
 import uk.co.thomasbooker.spritofnirn.trial.model.Trial;
 import uk.co.thomasbooker.spritofnirn.trial.model.TrialMember;
 import uk.co.thomasbooker.spritofnirn.trial.repository.TrialMemberRepository;
@@ -30,16 +30,20 @@ public class TrialDetailsCommandHandler extends TrialCommandHandler {
     }
 
     @Override
-    void handleCommand(MessageReceivedEvent event, List<String> commandArguments) {
-        Trial trial = trialRepository.findByName(commandArguments.get(0));
+    void handleCommand(TrialCommandDetails trialCommandDetails) {
+        Trial trial = trialRepository.findByName(trialCommandDetails.getCommandArgument(0));
         if (trial == null) {
-            event.getJDA().getTextChannelById(event.getChannel().getId()).sendMessage("Could not find trial " + commandArguments.get(0)).queue();
+            trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
+                    .sendMessage("Could not find trial " + trialCommandDetails.getCommandArgument(0)).queue();
             return;
         }
-        event.getJDA().getTextChannelById(event.getChannel().getId()).sendMessage(trial.toString()).queue();
+        trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
+                .sendMessage(trial.toString()).queue();
 
         List<TrialMember> trialMembers = trialMemberRepository.findByTrialId(trial.getId());
         trialMembers.forEach(trialMember ->
-                event.getJDA().getTextChannelById(event.getChannel().getId()).sendMessage(trialMember.toString()).queue());
+                trialCommandDetails.getEvent().getJDA().getTextChannelById(trialCommandDetails.getEvent().getChannel().getId())
+                        .sendMessage(trialMember.toString()).queue());
     }
+
 }

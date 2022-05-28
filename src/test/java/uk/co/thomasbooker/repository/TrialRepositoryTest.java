@@ -1,20 +1,5 @@
 package uk.co.thomasbooker.repository;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import uk.co.thomasbooker.model.Trial;
-import uk.co.thomasbooker.spritofnirn.Controller;
-
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 //@ExtendWith(SpringExtension.class)
 //@ContextConfiguration(
 //        classes = { Controller.class },

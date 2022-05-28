@@ -10,9 +10,6 @@ public class WebController {
     @Autowired
     MessageService messageService;
 
-    @Autowired
-    SpiritOfNirnBot spiritOfNirnBot;
-
     @RequestMapping("/")
     public String index() {
         return "index";

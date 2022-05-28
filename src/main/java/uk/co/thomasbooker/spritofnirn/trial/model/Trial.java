@@ -1,9 +1,6 @@
-package uk.co.thomasbooker.model;
+package uk.co.thomasbooker.spritofnirn.trial.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -16,7 +13,7 @@ public class Trial {
 
     private String name;
 
-    private LocalDateTime startTime;
+    private LocalDateTime startDateTime;
 
     private String owner;
 
@@ -27,10 +24,10 @@ public class Trial {
     public Trial() {
     }
 
-    public Trial(Long id, String name, LocalDateTime startTime, String owner) {
+    public Trial(Long id, String name, LocalDateTime startDateTime, String owner) {
         this.id = id;
         this.name = name;
-        this.startTime = startTime;
+        this.startDateTime = startDateTime;
         this.owner = owner;
     }
 
@@ -38,8 +35,8 @@ public class Trial {
         return name;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
     }
 
     public String getOwner() {
@@ -54,8 +51,8 @@ public class Trial {
         this.name = name;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
     public void setOwner(String owner) {
@@ -72,8 +69,8 @@ public class Trial {
         return this;
     }
 
-    public Trial withStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+    public Trial withStartDateTime(LocalDateTime startTime) {
+        this.startDateTime = startTime;
         return this;
     }
 
@@ -87,12 +84,12 @@ public class Trial {
         if (this == o) return true;
         if (!(o instanceof Trial)) return false;
         Trial trial = (Trial) o;
-        return getId().equals(trial.getId()) && getName().equals(trial.getName()) && getStartTime().equals(trial.getStartTime()) && getOwner().equals(trial.getOwner());
+        return getId().equals(trial.getId()) && getName().equals(trial.getName()) && getStartDateTime().equals(trial.getStartDateTime()) && getOwner().equals(trial.getOwner());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getStartTime(), getOwner());
+        return Objects.hash(getId(), getName(), getStartDateTime(), getOwner());
     }
 
     @Override
@@ -100,7 +97,7 @@ public class Trial {
         return "Trial{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", startTime=" + startTime +
+                ", startDateTime=" + startDateTime +
                 ", owner='" + owner + '\'' +
                 '}';
     }

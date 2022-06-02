@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import uk.co.thomasbooker.spritofnirn.ResourceLoader;
 
 import javax.security.auth.login.LoginException;
 
@@ -19,7 +20,7 @@ public class DiscordApp {
 
     @Bean
     public JDA jda(ModalSetupListener modalSetupListener) throws LoginException {
-        return JDABuilder.createDefault("OTgwNTQ4NTg3MTY1NDU0Mzk4.GbJFjY.o_KW-Ma-AVt4jW82EzECI2HpLFXcfOL83rvOf4")
+        return JDABuilder.createDefault(ResourceLoader.getDiscordToken())
                 .addEventListeners(modalSetupListener)
                 .build();
     }
